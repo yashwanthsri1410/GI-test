@@ -1,21 +1,24 @@
 import React, { useEffect, useState } from "react";
-import Headers from "../components/Header";
-import banner from "../assets/banner.png";
+import usePublicIp from "../hooks/usePublicIp";
+import Header from "../components/Header";
 import {
-  ArrowDown,
-  Mail,
-  MapPin,
-  HelpCircle,
   Users,
   UserPlus,
+  ArrowDown,
+  MapPin,
+  Mail,
+  HelpCircle,
 } from "lucide-react";
 
+import banner from "../assets/banner.png";
+
 import { useNavigate } from "react-router-dom";
-const EmployeeCreateForm = () => {
-  
-   const navigate = useNavigate();
+const Checkersapproval = () => {
+
+  const ip = usePublicIp();
   const username = localStorage.getItem("username");
-const scrollToFooter = () => {
+  const navigate = useNavigate();
+  const scrollToFooter = () => {
     window.scrollTo({
       top: document.body.scrollHeight,
       behavior: "smooth"
@@ -23,31 +26,37 @@ const scrollToFooter = () => {
   };
 
   return (
-    <>
-      <Headers />
+    <div>
+      <Header />
       <div className="flex min-h-screen bg-[#081028] text-white">
         {/* Sidebar */}
         <aside className="w-64 bg-[#0A1330] border-r border-[#1a233a] p-4 flex flex-col justify-between">
           <div>
             <nav className="space-y-2 text-sm">
 
-                <>
-                  <div className="flex items-center gap-2 px-2 py-2 rounded-md hover:bg-[#151f42] cursor-pointer" onClick={() => navigate("/Employee-creation")}>
-                    <UserPlus className="w-4 h-4 text-gray-400" />
-                    <span>Employee creation</span>
-                  </div>
-                  <div className="flex items-center gap-2 px-2 py-2 rounded-md hover:bg-[#151f42] cursor-pointer" onClick={() => navigate("/customer-On-boarding")}>
-                    <Users className="w-4 h-4 text-gray-400" />
-                    <span>Customer on boarding</span>
-                  </div>
-                </>
+              <>
+                <div className="flex items-center gap-2 px-2 py-2 rounded-md hover:bg-[#151f42] cursor-pointer" onClick={() => navigate("/Employee-Approval")}>
+                  <UserPlus className="w-4 h-4 text-gray-400" />
+                  <span>Employee pendings</span>
+                </div>
+                <div className="flex items-center gap-2 px-2 py-2 rounded-md hover:bg-[#151f42] cursor-pointer" onClick={() => navigate("/Customer-Approval")}>
+                  <Users className="w-4 h-4 text-gray-400" />
+                  <span>Customer pendings</span>
+                </div>
+              </>
             </nav>
           </div>
 
+          <button 
+            onClick={scrollToFooter}
+            className="flex items-center gap-2 px-2 py-2 rounded-md hover:bg-[#151f42] text-sm"
+          >
+            <ArrowDown className="w-4 h-4 text-gray-400" />
+            <span>Go to Footer</span>
+          </button>
         </aside>
 
         {/* Main content */}
-         {/* Main content */}
         <main className="flex-1 p-6">
           <h1 className="text-2xl font-semibold mb-4">
             Welcome, <span className="text-yellow-300">{username}</span>
@@ -129,9 +138,9 @@ const scrollToFooter = () => {
             </div>
           </div>
         </div>
-      </footer>
-    </>
+      </footer>    </div>
+
   );
 };
 
-export default EmployeeCreateForm;
+export default Checkersapproval;
